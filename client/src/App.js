@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Routes, Redirect, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Switch>
+        <Routes>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
@@ -40,13 +40,13 @@ class App extends React.Component {
             path='/signin'
             render={() =>
               this.props.currentUser ? (
-                <Redirect to='/' />
+                <Navigate to='/' />
               ) : (
                 <SignInAndSignUpPage />
               )
             }
           />
-        </Switch>
+        </Routes>
       </div>
     );
   }
